@@ -1,14 +1,14 @@
 <template>
     <v-app class="pa-5">
         <div>
-            <h1>{{title}}</h1>
+            <h1 @click="refresh">{{title}}</h1>
         </div>
         <v-flex lg6>
             <v-layout wrap>
-                <v-flex lg3 pr-7><v-text-field v-model="serviceUuid" label="Service UUID" readonly></v-text-field></v-flex>
-                <v-flex lg3><v-text-field v-model="characteristicUuid" label="Characteristic UUID" readonly></v-text-field></v-flex>
+                <v-flex lg3 pr-7><v-text-field v-model="serviceUuid" label="Service UUID:" readonly></v-text-field></v-flex>
+                <v-flex lg3><v-text-field v-model="characteristicUuid" label="Characteristic UUID:" readonly></v-text-field></v-flex>
             </v-layout>
-            <v-text-field v-model="message" label="Message"></v-text-field>
+            <v-text-field v-model="message" label="Message:"></v-text-field>
             <v-btn color="primary mb-10" small @click.prevent="getDevices">CONNECT/SEND</v-btn>
             <v-alert type="info">Log: {{logmsg}}</v-alert>
             <v-alert type="error">Error: {{error}}</v-alert>
@@ -102,6 +102,9 @@ export default {
         },
         setError: function (err) {
             this.error = err;
+        },
+        refresh(){
+            window.location.reload(false);
         }
     }
 }
