@@ -1,5 +1,5 @@
 <template>
-    <v-app class="pa-5">
+    <v-app class="pa-2">
         <div>
             <h1 @click="refresh">{{title}}</h1>
         </div>
@@ -8,28 +8,45 @@
                 <v-flex lg3 pr-7><v-text-field v-model="serviceUuid" label="Service UUID:" readonly></v-text-field></v-flex>
                 <v-flex lg3><v-text-field v-model="characteristicUuid" label="Characteristic UUID:" readonly></v-text-field></v-flex>
             </v-layout>
-            <div class="pb-4 d-flex justify-space-between">
+            <div class="pb-3 d-flex justify-space-between">
                 <v-btn outlined large fab @click.prevent="message='\\uf004'">
                     <v-icon>fas fa-heart</v-icon>
                 </v-btn>
-                <v-btn outlined large fab @click.prevent="message='\\uf818'">
-                    <v-icon>fas fa-pizza-slice</v-icon>
+                <v-btn outlined large fab @click.prevent="message='\\uf006'">
+                    <v-icon>far fa-star</v-icon>
                 </v-btn>                
                 <v-btn outlined large fab @click.prevent="message='\\uf118'">
                     <v-icon>far fa-smile</v-icon>
                 </v-btn>
-                <v-btn outlined large fab @click.prevent="message='\\uf5d7'">
-                    <v-icon>fas fa-bone</v-icon>
+                <v-btn outlined large fab @click.prevent="message='\\uf1B0'">
+                    <v-icon>fas fa-paw</v-icon>
                 </v-btn>                
-                <v-btn outlined large fab @click.prevent="message='\\uf2fe'">
-                    <v-icon>fas fa-poo</v-icon>
+                <v-btn outlined large fab @click.prevent="message='\\uf164'">
+                    <v-icon>fas fa-thumbs-up</v-icon>
                 </v-btn>                                
             </div>
+            <div class="pb-4 d-flex justify-space-between">
+                <v-btn outlined large fab @click.prevent="message='\\uf25B'">
+                    <v-icon>far fa-hand-peace</v-icon>
+                </v-btn>
+                <v-btn outlined large fab @click.prevent="message='\\uf06E'">
+                    <v-icon>far fa-eye</v-icon>
+                </v-btn>                
+                <v-btn outlined large fab @click.prevent="message='\\uf1BB'">
+                    <v-icon>fas fa-tree</v-icon>
+                </v-btn>
+                <v-btn outlined large fab @click.prevent="message='\\uf001'">
+                    <v-icon>fas fa-music</v-icon>
+                </v-btn>                
+                <v-btn outlined large fab @click.prevent="message='\\uf0E7'">
+                    <v-icon>fas fa-bolt</v-icon>
+                </v-btn>                                
+            </div>            
             <v-text-field v-model="message" label="Message:"></v-text-field>
             <v-btn color="primary mb-10" small @click.prevent="getDevices">CONNECT/SEND</v-btn>
             <v-alert type="info">Log: {{logmsg}}</v-alert>
             <v-alert type="error">Error: {{error}}</v-alert>
-            <kbd>data = [104,101,108,108,111]<br> word = ''.join([chr(a) for a in data])</kbd>
+            <!--<kbd>data = [104,101,108,108,111]<br> word = ''.join([chr(a) for a in data])</kbd>-->
         </v-flex>
     </v-app>
 </template>
