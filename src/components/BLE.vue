@@ -9,36 +9,36 @@
                 <v-flex lg3><v-text-field v-model="characteristicUuid" label="Characteristic UUID:" readonly></v-text-field></v-flex>
             </v-layout>
             <div class="pb-3 d-flex justify-space-between">
-                <v-btn outlined large fab @click.prevent="message='\\uf004'">
+                <v-btn outlined large fab @click.prevent="setDisplay('\\uf004')">
                     <v-icon>fas fa-heart</v-icon>
                 </v-btn>
-                <v-btn outlined large fab @click.prevent="message='\\uf006'">
+                <v-btn outlined large fab @click.prevent="setDisplay('\\uf006')">
                     <v-icon>far fa-star</v-icon>
                 </v-btn>                
-                <v-btn outlined large fab @click.prevent="message='\\uf118'">
+                <v-btn outlined large fab @click.prevent="setDisplay('\\uf118')">
                     <v-icon>far fa-smile</v-icon>
                 </v-btn>
-                <v-btn outlined large fab @click.prevent="message='\\uf1B0'">
+                <v-btn outlined large fab @click.prevent="setDisplay('\\uf1B0')">
                     <v-icon>fas fa-paw</v-icon>
                 </v-btn>                
-                <v-btn outlined large fab @click.prevent="message='\\uf164'">
+                <v-btn outlined large fab @click.prevent="setDisplay('\\uf164')">
                     <v-icon>fas fa-thumbs-up</v-icon>
                 </v-btn>                                
             </div>
             <div class="pb-4 d-flex justify-space-between">
-                <v-btn outlined large fab @click.prevent="message='\\uf25B'">
+                <v-btn outlined large fab @click.prevent="setDisplay('\\uf25B')">
                     <v-icon>far fa-hand-peace</v-icon>
                 </v-btn>
-                <v-btn outlined large fab @click.prevent="message='\\uf06E'">
+                <v-btn outlined large fab @click.prevent="setDisplay('\\uf06E')">
                     <v-icon>far fa-eye</v-icon>
                 </v-btn>                
-                <v-btn outlined large fab @click.prevent="message='\\uf1BB'">
+                <v-btn outlined large fab @click.prevent="setDisplay('\\uf1BB')">
                     <v-icon>fas fa-tree</v-icon>
                 </v-btn>
-                <v-btn outlined large fab @click.prevent="message='\\uf001'">
+                <v-btn outlined large fab @click.prevent="setDisplay('\\uf001')">
                     <v-icon>fas fa-music</v-icon>
                 </v-btn>                
-                <v-btn outlined large fab @click.prevent="message='\\uf0E7'">
+                <v-btn outlined large fab @click.prevent="setDisplay('\\uf0E7')">
                     <v-icon>fas fa-bolt</v-icon>
                 </v-btn>                                
             </div>            
@@ -59,7 +59,8 @@ export default {
         logmsg: '',
         error: '',
         serviceUuid: '0xec00',
-        characteristicUuid: '0xec0f'
+        characteristicUuid: '0xec0f',
+        tempchar:null
     }),
     mounted: function () {
         if (!navigator.bluetooth) {
@@ -106,6 +107,7 @@ export default {
                     .then(characteristic => {
                         let encoder = new TextEncoder('utf-8');
                         this.log("Encoded Message: " + encoder.encode(this.message));
+                        this.tempchar = characteristic;
                         return characteristic.writeValue(encoder.encode(this.message));
                     })
                     .then(() => {
@@ -140,6 +142,15 @@ export default {
         },
         refresh(){
             window.location.reload(false);
+        },
+        setDisplay(code){
+            this.message = code;
+            if(this.tempchar!==null){
+                let encoder = new TextEncoder('utf-8');
+                this.clearLog();
+                this.log("Encoded Message: " + encoder.encode(this.message));
+                this.tempchar.writeValue(encoder.encode(this.message));
+            }
         }
     }
 }
